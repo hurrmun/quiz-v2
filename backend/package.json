@@ -1,0 +1,11 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "API for quiz-two project",
+  "main": "index.ts",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Herman Loh",
+  "license": "MIT"
+}

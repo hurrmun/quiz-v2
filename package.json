@@ -1,0 +1,26 @@
+{
+  "name": "quiz-two",
+  "version": "1.0.0",
+  "description": "full-stack quiz application",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hurrmun/quiz-v2.git"
+  },
+  "keywords": [
+    "quiz",
+    "nodeJS",
+    "React",
+    "Typescript",
+    "koa"
+  ],
+  "author": "Herman Loh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hurrmun/quiz-v2/issues"
+  },
+  "homepage": "https://github.com/hurrmun/quiz-v2#readme"
+}
