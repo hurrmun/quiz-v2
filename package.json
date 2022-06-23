@@ -2,7 +2,7 @@
   "name": "quiz-two",
   "version": "1.0.0",
   "description": "full-stack quiz application",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "test"
   },
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/hurrmun/quiz-v2/issues"
   },
-  "homepage": "https://github.com/hurrmun/quiz-v2#readme"
+  "homepage": "https://github.com/hurrmun/quiz-v2#readme",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
 }

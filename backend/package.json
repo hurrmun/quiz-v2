@@ -4,17 +4,24 @@
   "description": "API for quiz-two project",
   "main": "index.ts",
   "scripts": {
-    "test": "test"
+    "backend": "nodemon index.ts"
   },
   "author": "Herman Loh",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "class-validator": "^0.13.2",
+    "dotenv": "^16.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^2.1.0",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-json": "^2.0.2",
-    "koa-router": "^10.1.1"
+    "koa-router": "^10.1.1",
+    "pg": "^8.7.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "typescript": "^4.7.4"
   }
 }
