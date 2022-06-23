@@ -1,9 +1,11 @@
 //* DEPENDENCIES
-require('dotenv').config({ path: './config.env' });
-
+// require('dotenv').config({ path: './config.env' });
+import { config } from 'dotenv';
 import * as Koa from 'koa';
 import { DefaultState, DefaultContext, ParameterizedContext } from 'koa';
 import * as Router from 'koa-router';
+
+config();
 
 // const json = require('koa-json');
 // const bodyParser = require('koa-bodyparser');
@@ -11,7 +13,7 @@ import * as Router from 'koa-router';
 //* CONFIG
 const app: Koa<DefaultState, DefaultContext> = new Koa();
 const router: Router = new Router();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 //* MIDDLEWARE
 // app.use(json());
@@ -23,7 +25,7 @@ const PORT = process.env.PORT || 3000;
 router.get(
   '/',
   async (ctx: ParameterizedContext<DefaultState, DefaultContext>) => {
-    ctx.body = { msg: 'hello world' };
+    ctx.body = { msg: 'hello world json' };
   }
 );
 
@@ -31,9 +33,9 @@ app.use(router.routes()).use(router.allowedMethods());
 
 //* LISTENER
 app
-  .listen(PORT)
+  .listen(port)
   .on('listening', () =>
     console.log(
-      `server started on port: ${PORT}. go to http://localhost:${PORT}`
+      `server started on port: ${port}. Go to http://localhost:${port}`
     )
   );

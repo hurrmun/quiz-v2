@@ -4,7 +4,7 @@
   "description": "API for quiz-two project",
   "main": "index.ts",
   "scripts": {
-    "backend": "nodemon index.ts"
+    "backend": "ts-node-dev server.ts"
   },
   "author": "Herman Loh",
   "license": "MIT",
@@ -25,7 +25,6 @@
     "@types/koa-bodyparser": "^4.3.7",
     "@types/koa-router": "^7.4.4",
     "@types/node": "^18.0.0",
-    "nodemon": "^2.0.16",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.7.4"
   }
