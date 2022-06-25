@@ -1,6 +1,6 @@
-const koaRouter = require('koa-router');
-const router = new koaRouter();
+import * as Router from 'koa-router';
+const router: Router = new Router();
 
 router.get('/test', async function test(ctx) {
-  await ctx.render('index', { title: 'test' });
+  ctx.body = { message: 'hello' };
 });
