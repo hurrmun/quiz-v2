@@ -1,41 +1,44 @@
 //* DEPENDENCIES
-// require('dotenv').config({ path: './config.env' });
-import { config } from 'dotenv';
-import * as Koa from 'koa';
-import { DefaultState, DefaultContext, ParameterizedContext } from 'koa';
-import * as Router from 'koa-router';
+import Koa from 'koa';
+import Router from 'koa-router';
+import koaLogger from 'koa-logger';
+import bodyParser from 'koa-bodyparser';
+import cors from 'koa-cors';
+import { config } from './src/configs/config';
 
-config();
-
-// const json = require('koa-json');
-// const bodyParser = require('koa-bodyparser');
+//* IMPORT ROUTES
+import userRoutes from './src/routes/users';
 
 //* CONFIG
-const app: Koa<DefaultState, DefaultContext> = new Koa();
-const router: Router = new Router();
-const port = process.env.PORT || 3000;
+const app = new Koa();
+const PORT = config.port;
+
+//* ROUTER MIDDLEWARE
+const apiRoutes = new Router({ prefix: '/api' });
+
+apiRoutes.use(userRoutes.routes());
 
 //* MIDDLEWARE
-// app.use(json());
-// app.use(bodyParser());
-// app.use(router.routes()).use(router.allowedMethods());
-
-//* ROUTES
-// app.use('/api/auth', require('./src/routes/auth'));
-router.get(
-  '/',
-  async (ctx: ParameterizedContext<DefaultState, DefaultContext>) => {
-    ctx.body = { msg: 'hello world json' };
-  }
-);
-
-app.use(router.routes()).use(router.allowedMethods());
+app
+  .use(bodyParser())
+  .use(
+    cors({
+      origin: '*',
+    })
+  )
+  .use(koaLogger())
+  .use(apiRoutes.routes())
+  .use(apiRoutes.allowedMethods());
 
 //* LISTENER
-app
-  .listen(port)
-  .on('listening', () =>
+const server = app
+  .listen(PORT, async () => {
     console.log(
-      `server started on port: ${port}. Go to http://localhost:${port}`
-    )
-  );
+      `server is listening on: ${PORT}. Go to http://localhost:${PORT}`
+    );
+  })
+  .on('error', (err) => {
+    console.error(err);
+  });
+
+export default server;
