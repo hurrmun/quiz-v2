@@ -10,6 +10,16 @@ import {
 const router: Router = new Router({
   prefix: '/user',
 });
+router.get('/ping', (ctx) => {
+  try {
+    ctx.body = {
+      status: 'success',
+      message: 'pong',
+    };
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 //* register for account
 router.post('/register', registerUser);
