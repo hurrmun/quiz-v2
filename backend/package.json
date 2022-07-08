@@ -16,13 +16,17 @@
     "knex": "^2.1.0",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
+    "koa-cors": "^0.0.16",
     "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
     "koa-router": "^10.1.1",
     "pg": "^8.7.3"
   },
   "devDependencies": {
     "@types/koa": "^2.13.4",
     "@types/koa-bodyparser": "^4.3.7",
+    "@types/koa-cors": "^0.0.2",
+    "@types/koa-logger": "^3.1.2",
     "@types/koa-router": "^7.4.4",
     "@types/node": "^18.0.0",
     "ts-node-dev": "^2.0.0",
