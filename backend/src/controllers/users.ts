@@ -1,10 +1,12 @@
 import { validate } from 'class-validator';
+import bcrypt from 'bcrypt';
 import Koa from 'koa';
 import {
   generateAccessToken,
   generateRefreshToken,
 } from '../services/authToken';
 import {
+  dbAddRefreshToken,
   dbCreateUser,
   dbFindUserByEmail,
   dbFindUserByUsername,
@@ -72,8 +74,42 @@ export const registerUser = async (ctx: Koa.DefaultContext, next: Koa.Next) => {
 
 export const loginUser = async (ctx: Koa.DefaultContext, next: Koa.Next) => {
   try {
+    //* check if email exists in db
+    const userByEmail = await dbFindUserByEmail(ctx.request.body.email);
+    if (!userByEmail) {
+      ctx.body = {
+        message: 'account does not exist',
+      };
+      return ctx.throw(400, 'account does not exist');
+    }
+
+    //* check if password is matching
+    const isPasswordMatching = await bcrypt.compare(
+      ctx.request.body.password,
+      userByEmail.password
+    );
+
+    if (!isPasswordMatching) {
+      ctx.body = {
+        message: 'incorrect password',
+      };
+      return ctx.throw(400, 'incorrect password');
+    }
+
+    //* create token for login & add to DB
+    const accessToken = await generateAccessToken(userByEmail);
+    const refreshToken = await generateRefreshToken(userByEmail);
+
+    await dbAddRefreshToken(refreshToken, userByEmail.user_id);
+
     ctx.body = {
-      message: 'created',
+      user: {
+        user_id: userByEmail.user_id,
+        email: userByEmail.email,
+        username: userByEmail.username,
+      },
+      accessToken: accessToken,
+      refreshToken: refreshToken,
     };
   } catch (error) {
     console.error(error);

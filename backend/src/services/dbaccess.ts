@@ -42,3 +42,12 @@ export const dbFindUserByUsername = async (username: string) => {
     console.error(error);
   }
 };
+
+export const dbAddRefreshToken = async (token: string, user_id: string) => {
+  try {
+    await knex('tokens').insert({
+      token,
+      user_id,
+    });
+  } catch (error) {}
+};
