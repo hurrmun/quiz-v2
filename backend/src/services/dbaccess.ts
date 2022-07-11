@@ -43,11 +43,15 @@ export const dbFindUserByUsername = async (username: string) => {
   }
 };
 
+//! add expires at and last used
 export const dbAddRefreshToken = async (token: string, user_id: string) => {
   try {
-    await knex('tokens').insert({
+    return await knex('tokens').insert({
       token,
+      created_at: Date.now(),
       user_id,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
 };
